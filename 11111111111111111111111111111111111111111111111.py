@@ -3,10 +3,13 @@ import numpy as np
 
 pygame.init()
 
+WHITE = (255,255,255)
+GRAY = (204, 204, 204)
 BLUE = (0, 0, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
+GREEN = (0, 255, 0)
 large_font = pygame.font.SysFont('malgungothic', 72)
 CELL_SIZE = 100
 COLUMN_COUNT = 7
@@ -112,11 +115,11 @@ def runGame():
         if turn == 0:
             pygame.draw.circle(screen, RED, (mouse_x, CELL_SIZE // 2), CELL_SIZE // 2 - 5)
         else: 
-            pygame.draw.circle(screen, YELLOW, (mouse_x, CELL_SIZE // 2), CELL_SIZE // 2 - 5)
+            pygame.draw.circle(screen, GREEN, (mouse_x, CELL_SIZE // 2), CELL_SIZE // 2 - 5)
 
         for column_index in range(COLUMN_COUNT):
             for row_index in range(ROW_COUNT):
-                pygame.draw.rect(screen, BLUE, pygame.Rect(column_index * CELL_SIZE, row_index * CELL_SIZE + CELL_SIZE, CELL_SIZE, CELL_SIZE))
+                pygame.draw.rect(screen, GRAY, pygame.Rect(column_index * CELL_SIZE, row_index * CELL_SIZE + CELL_SIZE, CELL_SIZE, CELL_SIZE))
                 pygame.draw.circle(screen, BLACK, (column_index * CELL_SIZE + CELL_SIZE // 2, row_index * CELL_SIZE + CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 2 - 5)
 
         for column_index in range(COLUMN_COUNT):
@@ -126,17 +129,17 @@ def runGame():
                     pygame.draw.circle(screen, RED, (column_index * CELL_SIZE + CELL_SIZE // 2, height - (row_index * CELL_SIZE + CELL_SIZE // 2)), CELL_SIZE // 2 - 5)
                 elif grid[row_index][column_index] == 2: 
                     height = CELL_SIZE * (ROW_COUNT + 1)
-                    pygame.draw.circle(screen, YELLOW, (column_index * CELL_SIZE + CELL_SIZE // 2, height - (row_index * CELL_SIZE + CELL_SIZE // 2)), CELL_SIZE // 2 - 5)   
+                    pygame.draw.circle(screen, GREEN, (column_index * CELL_SIZE + CELL_SIZE // 2, height - (row_index * CELL_SIZE + CELL_SIZE // 2)), CELL_SIZE // 2 - 5)   
 
         if game_over > 0: 
             if game_over == P1_WIN:
-                p1_win_image = large_font.render('Red (1) Win', True, RED)
+                p1_win_image = large_font.render('Red Win', True, YELLOW)
                 screen.blit(p1_win_image, p1_win_image.get_rect(centerx=SCREEN_WIDTH // 2, centery=SCREEN_HEIGHT // 2))
             elif game_over == P2_WIN:
-                p2_win_image = large_font.render('Yellow (2) Win', True, RED)
+                p2_win_image = large_font.render('Green Win', True, YELLOW)
                 screen.blit(p2_win_image, p2_win_image.get_rect(centerx=SCREEN_WIDTH // 2, centery=SCREEN_HEIGHT // 2))
             else:
-                draw_image = large_font.render('Draw', True, RED)
+                draw_image = large_font.render('Draw', True, YELLOW)
                 screen.blit(draw_image, draw_image.get_rect(centerx=SCREEN_WIDTH // 2, centery=SCREEN_HEIGHT // 2))
 
         pygame.display.update()
